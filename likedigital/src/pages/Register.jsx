@@ -1,6 +1,10 @@
-import { useState } from "react";
-import { AiFillCamera } from "react-icons/ai";
+import React, { useState } from "react";
 
+import { InputField, TextAreaField } from "../components/Register/InputSection";
+import {
+  ImageUploadButton,
+  ImagePreview,
+} from "../components/Register/ImageSection.jsx";
 const Register = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -37,70 +41,33 @@ const Register = () => {
   return (
     <div className="flex flex-col p-4">
       <form className="space-y-2 flex flex-col flex-1" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title" className="block text-lg">
-            제목
-          </label>
-          <input
-            id="title"
-            name="title"
-            type="text"
-            required
-            className="mt-1 px-2 block w-full text-lg py-[2px] border border-gray-500 rounded-md"
-            placeholder="제목을 입력해주세요."
-            value={title}
-            onChange={handleTitleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="content" className="block text-lg">
-            내용
-          </label>
-          <textarea
-            id="content"
-            name="content"
-            required
-            className="mt-1 px-2 block w-full h-48 text-lg py-[2px] border border-gray-500 rounded-md"
-            placeholder="내용을 입력해주세요."
-            value={content}
-            onChange={handleContentChange}
-          />
-        </div>
+        <InputField
+          label="제목"
+          name="title"
+          type="text"
+          required
+          placeholder="제목을 입력해주세요."
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <TextAreaField
+          label="내용"
+          name="content"
+          required
+          placeholder="내용을 입력해주세요."
+          value={content}
+          onChange={handleContentChange}
+        />
         <div>
           <label htmlFor="file" className="block text-lg text-gray-700">
             첨부파일
           </label>
           <div className="mt-2 flex space-x-2">
             {previews.map((preview, index) => (
-              <div
-                key={index}
-                className="w-16 h-16 border-2 border-gray-300 rounded-md overflow-hidden"
-              >
-                <img
-                  src={preview}
-                  alt={`Preview ${index + 1}`}
-                  className="object-contain w-full h-full"
-                />
-              </div>
+              <ImagePreview key={index} src={preview} />
             ))}
             {previews.length < 4 && (
-              <label
-                htmlFor="file"
-                className="w-16 h-16 flex items-center justify-center text-[12px] border-2 border-dashed border-gray-300 rounded-md cursor-pointer"
-              >
-                <p className="flex flex-col justify-center items-center">
-                  <AiFillCamera className="text-[24px]" />
-                  사진 추가
-                </p>
-                <input
-                  id="file"
-                  name="file"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-              </label>
+              <ImageUploadButton onUpload={handleFileChange} />
             )}
           </div>
         </div>

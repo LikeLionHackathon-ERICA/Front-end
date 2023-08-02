@@ -6,6 +6,7 @@ import "./index.css";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import RegisterView from "./pages/RegisterView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "problem/:id",
+        element: <RegisterView />,
       },
     ],
   },
