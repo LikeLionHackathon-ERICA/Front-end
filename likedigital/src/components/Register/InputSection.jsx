@@ -4,7 +4,7 @@ export const InputField = ({ label, value, onChange, ...props }) => (
       {label}
     </label>
     <input
-      className="mt-1 px-2 block w-full text-lg py-[2px] border border-gray-500 rounded-md"
+      className="mt-1 focus:border-primary px-2 block w-full text-lg py-[2px] border border-gray-500 rounded-md"
       value={value}
       onChange={onChange}
       {...props}
@@ -18,7 +18,7 @@ export const TextAreaField = ({ label, value, onChange, ...props }) => (
       {label}
     </label>
     <textarea
-      className="mt-1 px-2 block w-full h-48 text-lg py-[2px] border border-gray-500 rounded-md"
+      className="mt-1 focus:border-primary px-2 block w-full h-48 text-lg py-[2px] border border-gray-500 rounded-md"
       value={value}
       onChange={onChange}
       {...props}

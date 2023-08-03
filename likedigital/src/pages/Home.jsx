@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import CameraCapture from "../components/CameraCapture";
 
 export default function Home() {
-  return (
-    <div>Home</div>
-  )
+  return <div></div>;
 }

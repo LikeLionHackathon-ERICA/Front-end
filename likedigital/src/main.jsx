@@ -6,15 +6,16 @@ import "./index.css";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import RegisterView from "./pages/RegisterView.jsx";
+import ProblemView from "./pages/ProblemView.jsx";
+import Error from "./pages/Error.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // errorElement: <Error/>,
+    errorElement: <Error />,
     children: [
-      { index: true, path: "/", element: <Home /> },
+      { index: true, path: "/home", element: <Home /> },
       {
         path: "login",
         element: <Login />,
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       },
       {
         path: "problem/:id",
-        element: <RegisterView />,
+        element: <ProblemView />,
       },
     ],
   },

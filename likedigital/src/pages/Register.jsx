@@ -5,12 +5,13 @@ import {
   ImageUploadButton,
   ImagePreview,
 } from "../components/Register/ImageSection.jsx";
+import { CaptureModal } from "../components/Register/CaptureModal";
 const Register = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [files, setFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleContentChange = (e) => setContent(e.target.value);
   const handleFileChange = (e) => {
@@ -38,8 +39,19 @@ const Register = () => {
     });
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <div className="flex flex-col p-4">
+    <section className="flex flex-col p-4">
+      <div className="mb-4 text-start">
+        <h2 className="text-primary text-2xl">문제 등록</h2>
+        <span className="text-lg">곤란을 겪고 계신 문제를 설명해주세요</span>
+      </div>
       <form className="space-y-2 flex flex-col flex-1" onSubmit={handleSubmit}>
         <InputField
           label="제목"
@@ -62,6 +74,10 @@ const Register = () => {
           <label htmlFor="file" className="block text-lg text-gray-700">
             첨부파일
           </label>
+          <div>
+            <button onClick={handleOpenModal}>Screen Capture Guide</button>
+          </div>
+          {isModalOpen && <CaptureModal onClose={handleCloseModal} />}
           <div className="mt-2 flex space-x-2">
             {previews.map((preview, index) => (
               <ImagePreview key={index} src={preview} />
@@ -80,7 +96,7 @@ const Register = () => {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 
