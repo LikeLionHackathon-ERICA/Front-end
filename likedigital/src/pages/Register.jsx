@@ -71,11 +71,16 @@ const Register = () => {
           onChange={handleContentChange}
         />
         <div>
-          <label htmlFor="file" className="block text-lg text-gray-700">
-            첨부파일
-          </label>
-          <div>
-            <button onClick={handleOpenModal}>Screen Capture Guide</button>
+          <div className="flex gap-4 justify-between items-center">
+            <label htmlFor="file" className="block text-lg text-gray-700">
+              첨부파일
+            </label>
+            <button
+              onClick={handleOpenModal}
+              className="bg-sky text-white px-2 rounded-md text-md"
+            >
+              화면 사진(스크린샷)을 찍는 방법
+            </button>
           </div>
           {isModalOpen && <CaptureModal onClose={handleCloseModal} />}
           <div className="mt-2 flex space-x-2">
