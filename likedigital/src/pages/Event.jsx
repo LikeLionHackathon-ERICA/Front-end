@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 function Event() {
   return (
+    // 슬라이드 효과 미구현 - react-slick
     <div className="event-container">
       <div className="event-section-1">
         <div className="event1">Event</div>

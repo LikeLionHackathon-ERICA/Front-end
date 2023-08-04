@@ -13,8 +13,8 @@ export default function Home() {
       <Header />
       <Event />
       <Problem />
-      {/* <Guide /> */}
-      {/* <MostQusetion /> */}
+      <Guide />
+      <MostQusetion />
     </>
   );
 }

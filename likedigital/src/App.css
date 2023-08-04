@@ -115,6 +115,10 @@
   .problem-container {
     padding-top: 5px;
   }
+  .bear1 {
+    width: 100px;
+    padding-bottom: 18px;
+  }
 }
 
 @media screen and (min-width: 375px) {
@@ -150,6 +154,7 @@
 .problem-container {
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 30px;
 }
 
 .problem-section-1 {
@@ -218,4 +223,32 @@
   justify-content: space-evenly;
   color: #a7a7a7;
   text-align: right;
+}
+
+.guide-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 30px;
+}
+
+.guide-box {
+  width: 100%;
+  height: 66px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: #fff8cd;
+  border: 3px solid #fff3a6;
+  border-radius: 10px;
+  font-size: 80%;
+  font-family: "IBMPlexSansKR-Medium";
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #484848;
+  text-align: right;
+}
+
+.mq_container {
+  padding-left: 15px;
+  padding-right: 15px;
 }

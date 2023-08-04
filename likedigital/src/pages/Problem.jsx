@@ -20,7 +20,7 @@ function Problem() {
       </div>
       <div className="problem-box3">
         <h3>다른 질문이 있어요!</h3>
-        <img src={bear1} alt="bear1" style={{ width: "30%" }} />
+        <img className="bear1" src={bear1} alt="bear1" />
       </div>
     </div>
   );
