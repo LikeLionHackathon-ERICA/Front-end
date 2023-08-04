@@ -1,0 +1,132 @@
+@font-face {
+  font-family: "Poppins-ExtraBoldItalic";
+  src: url("./fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url("./fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "IBMPlexSansKR-Medium";
+  src: url("./fonts/IBMPlexSansKR-Medium.ttf") format("truetype");
+}
+
+.header-container {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.title {
+  text-align: left;
+  font-size: 20px;
+  font-family: "Poppins-ExtraBoldItalic";
+  color: #39c088;
+}
+
+.search {
+  width: 18px;
+}
+
+.event-container {
+  width: 100%;
+  height: 150px;
+  padding-left: 15px;
+  padding-top: 20px;
+  background-image: url("./assets/event1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.event-section-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-section-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.event1 {
+  font-size: 12px;
+  font-family: "Poppins-SemiBold";
+  margin-bottom: 10px;
+  color: #ffbf47;
+}
+
+.event2 {
+  font-size: 17px;
+  font-family: "IBMPlexSansKR-Medium";
+  color: #646464;
+  margin-right: 10px;
+}
+
+.event3 {
+  font-size: 11px;
+  font-family: "IBMPlexSansKR-Medium";
+  color: #c9c9c9;
+}
+
+.event4 {
+  width: 40px;
+  height: 18px;
+  background: #262626;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  font-family: "Poppins-Medium";
+  font-size: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (min-width: 320px) {
+  .event-container {
+    padding-top: 15px;
+  }
+  .event1 {
+    margin-bottom: 8px;
+  }
+  .event-section-2 {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .event-container {
+    padding-top: 15px;
+  }
+  .event1 {
+    margin-bottom: 12px;
+  }
+  .event-section-2 {
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .event-container {
+    padding-top: 20px;
+  }
+  .event1 {
+    margin-bottom: 18px;
+  }
+  .event-section-2 {
+    margin-bottom: 30px;
+  }
+}
