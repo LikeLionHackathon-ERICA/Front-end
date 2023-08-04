@@ -2,7 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import underline from "../assets/underline.png";
-import toggle from "../assets/toggle.png";
+import togglewhite from "../assets/toggle-white.png";
+import togglegray from "../assets/toggle-gray.png";
 
 function MostQusetion() {
   return (
@@ -10,7 +11,8 @@ function MostQusetion() {
       <h3 className="problem1">많이 검색한 질문</h3>
 
       <img src={underline} alt="guideslide" />
-      <img src={toggle} alt="toggle" />
+      <img src={togglewhite} alt="toggle-white" />
+      <img src={togglegray} alt="toggle-gray" />
     </div>
   );
 }
