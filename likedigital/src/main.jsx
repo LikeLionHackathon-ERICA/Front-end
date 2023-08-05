@@ -8,18 +8,24 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ProblemView from "./pages/ProblemView.jsx";
 import Error from "./pages/Error.jsx";
+import SelectService from "./pages/SelectService.jsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/select-service",
+    element: <SelectService />,
+    index: true,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <App />,
     errorElement: <Error />,
     children: [
-      { index: true, path: "/home", element: <Home /> },
-      {
-        path: "login",
-        element: <Login />,
-      },
+      { path: "/home", element: <Home /> },
       {
         path: "register",
         element: <Register />,
