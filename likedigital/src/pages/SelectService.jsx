@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const BTN_STYLE =
   "flex flex-col justify-center items-center gap-2 bg-opacity-20 border-[3px] rounded-xl py-6 px-3";
 export default function SelectService() {
+  const navigate = useNavigate();
   return (
     <section className="flex flex-col h-[70vh] justify-between items-center py-8">
       <div className="w-[90%] py-[6px] bg-gray-300 rounded-full" />
@@ -15,7 +17,10 @@ export default function SelectService() {
             src="/imgs/Blue.png"
             alt="Bear"
           />
-          <div className={`bg-sky border-sky ${BTN_STYLE}`}>
+          <div
+            onClick={() => navigate("/login/receiver")}
+            className={`bg-sky border-sky ${BTN_STYLE}`}
+          >
             <span className="text-sky">Question</span>
             <span>질문하러 왔어요</span>
           </div>
@@ -26,7 +31,10 @@ export default function SelectService() {
             src="/imgs/Green.png"
             alt="Bear"
           />
-          <div className={`bg-primary border-primary ${BTN_STYLE}`}>
+          <div
+            onClick={() => navigate("/login/provider")}
+            className={`bg-primary border-primary ${BTN_STYLE}`}
+          >
             <span className="text-primary">Answer</span>
             <span>해결하러 왔어요</span>
           </div>

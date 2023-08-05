@@ -9,6 +9,7 @@ import Register from "./pages/Register.jsx";
 import ProblemView from "./pages/ProblemView.jsx";
 import Error from "./pages/Error.jsx";
 import SelectService from "./pages/SelectService.jsx";
+import ProblemDetail from "./pages/ProblemDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     index: true,
   },
   {
-    path: "/login",
+    path: "/login/:userType",
     element: <Login />,
   },
   {
@@ -25,14 +26,18 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: "/home", element: <Home /> },
+      { path: "home", element: <Home /> },
       {
         path: "register",
         element: <Register />,
       },
       {
-        path: "problem/:id",
+        path: "problem",
         element: <ProblemView />,
+      },
+      {
+        path: "problem/:id",
+        element: <ProblemDetail />,
       },
     ],
   },

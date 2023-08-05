@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Login = () => {
+  const { userType } = useParams();
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -9,6 +11,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //로그인 성공시
+    // localStorage.setItem("userType", userType);
+    // localStorage.setItem("id", id);
+    // localStorage.setItem("password", password);
     console.log(`ID: ${id}, Password: ${password}`);
   };
 
@@ -39,7 +45,7 @@ const Login = () => {
                 autoComplete="username"
                 required
                 className={`${commonInputStyle} rounded-t-md`}
-                placeholder="ID"
+                placeholder={userType === "provider" ? "ID" : "전화번호"}
                 value={id}
                 onChange={handleIdChange}
               />
@@ -55,7 +61,7 @@ const Login = () => {
                 autoComplete="current-password"
                 required
                 className={`${commonInputStyle} rounded-b-md`}
-                placeholder="Password"
+                placeholder="비밀번호"
                 value={password}
                 onChange={handlePasswordChange}
               />
@@ -64,7 +70,7 @@ const Login = () => {
 
           <div>
             <button type="submit" className={buttonStyle}>
-              LOG IN
+              LOG IN / 확인
             </button>
           </div>
         </form>
