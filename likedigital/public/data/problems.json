@@ -1,0 +1,23 @@
+[
+  {
+    "title": "유튜브 계정만들기 어려워요",
+    "phoneNumber": "010-1234-4231",
+    "distance": "200m",
+    "status": "진행중",
+    "category": "인터넷"
+  },
+  {
+    "title": "송금하는 방법",
+    "phoneNumber": "010-5678-9012",
+    "distance": "500m",
+    "status": "대기중",
+    "category": "인터넷"
+  },
+  {
+    "title": "등산 동호회 찾기",
+    "phoneNumber": "010-5678-9012",
+    "distance": "500m",
+    "status": "대기중",
+    "category": "운동"
+  }
+]
