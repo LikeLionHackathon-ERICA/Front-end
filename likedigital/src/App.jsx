@@ -1,12 +1,9 @@
 import { Outlet } from "react-router-dom";
-import "./App.css";
+import BottomNav from "./components/BottomNav";
 
 function App() {
   return (
-    <div>
+    <div className="relative">
       <Outlet />
-    </div>
-  );
-}
-
+      <BottomNav />
 export default App;

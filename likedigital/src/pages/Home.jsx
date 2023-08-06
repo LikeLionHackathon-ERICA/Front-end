@@ -1,4 +1,6 @@
 import React from "react";
+import CameraCapture from "../components/CameraCapture";
+
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./Header";

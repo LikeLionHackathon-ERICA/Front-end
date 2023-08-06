@@ -3,25 +3,34 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'JUA';
-  src: url('./fonts/BMJUA.ttf');
+  font-family: "JUA";
+  src: url("./fonts/BMJUA.ttf");
 }
 
 @font-face {
-  font-family: 'BMDOHYEON';
-  src: url('./fonts/BMDOHYEON.ttf');
+  font-family: "BMDOHYEON";
+  src: url("./fonts/BMDOHYEON.ttf");
 }
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-html, body {
+.font-jua {
+  font-family: "JUA";
+}
+
+.font-doh {
+  font-family: "BMDOHYEON";
+}
+
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
-  font-family: 'JUA';
+  font-family: "JUA";
 }
 a {
   text-decoration: none;
