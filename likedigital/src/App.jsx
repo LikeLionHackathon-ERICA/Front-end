@@ -6,8 +6,4 @@ function App() {
     <div className="relative">
       <Outlet />
       <BottomNav />
-    </div>
-  );
-}
-
 export default App;
