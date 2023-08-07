@@ -10,6 +10,7 @@ import ProblemView from "./pages/ProblemView.jsx";
 import Error from "./pages/Error.jsx";
 import SelectService from "./pages/SelectService.jsx";
 import ProblemDetail from "./pages/ProblemDetail.jsx";
+import MatchPage from "./pages/MatchPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "problem/:id",
         element: <ProblemDetail />,
+      },
+      {
+        path: "match/:id",
+        element: <MatchPage />,
       },
     ],
   },

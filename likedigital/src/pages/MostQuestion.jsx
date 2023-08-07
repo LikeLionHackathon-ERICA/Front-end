@@ -59,7 +59,7 @@ function MostQusetion() {
 
       <div>
         {users.map((user) => (
-          <Rank user={user} />
+          <Rank key={user.id} user={user} />
         ))}
       </div>
 
