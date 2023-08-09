@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { registerAuth } from "../util";
 
 const Login = () => {
   const { userType } = useParams();
@@ -11,10 +12,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //로그인 성공시
     // localStorage.setItem("userType", userType);
     // localStorage.setItem("id", id);
     // localStorage.setItem("password", password);
+
     console.log(`ID: ${id}, Password: ${password}`);
   };
 

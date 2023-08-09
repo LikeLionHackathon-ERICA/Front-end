@@ -11,16 +11,21 @@ import Error from "./pages/Error.jsx";
 import SelectService from "./pages/SelectService.jsx";
 import ProblemDetail from "./pages/ProblemDetail.jsx";
 import MatchPage from "./pages/MatchPage.jsx";
+import AuthRegister from "./pages/AuthRegister.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/select-service",
+    path: "/",
     element: <SelectService />,
     index: true,
   },
   {
     path: "/login/:userType",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <AuthRegister />,
   },
   {
     path: "/",
