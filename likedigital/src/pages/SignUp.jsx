@@ -3,14 +3,14 @@ import { registerAuth } from "../util";
 
 const LABEL_STYLE = "block text-md mb-2";
 
-const AuthRegister = () => {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password1: "",
     password2: "",
-    userType: "provider",
-    phoneNumber: "",
+    user_type: "provider",
+    phone_number: "",
   });
 
   const handleChange = (e) => {
@@ -20,6 +20,7 @@ const AuthRegister = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     registerAuth(formData);
   };
 
@@ -51,7 +52,6 @@ const AuthRegister = () => {
           비밀번호
         </label>
         <input
-          type="password"
           name="password1"
           id="password1"
           className="border p-2 w-full mb-4"
@@ -61,7 +61,6 @@ const AuthRegister = () => {
           비밀번호 확인
         </label>
         <input
-          type="password"
           name="password2"
           id="password2"
           className="border p-2 w-full mb-4"
@@ -79,13 +78,13 @@ const AuthRegister = () => {
           <option value="provider">도움 제공</option>
           <option value="assistant">도움 받기</option>
         </select>
-        <label className={LABEL_STYLE} htmlFor="phoneNumber">
+        <label className={LABEL_STYLE} htmlFor="phone_number">
           전화번호
         </label>
         <input
           type="tel"
-          name="phoneNumber"
-          id="phoneNumber"
+          name="phone_number"
+          id="phone_number"
           className="border p-2 w-full mb-4"
           onChange={handleChange}
         />
@@ -100,4 +99,4 @@ const AuthRegister = () => {
   );
 };
 
-export default AuthRegister;
+export default SignUp;
