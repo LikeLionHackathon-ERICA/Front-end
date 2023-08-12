@@ -21,11 +21,11 @@ export const LoginAuth = async (user) => {
 };
 
 export const getMyProfile = async () => {
-  const response = await axios.get(`${BASE_URL}/auth/user/`, {
+  const response = await axios.get(`${BASE_URL}/auth/profile/`, {
     headers: {
       Authorization: localStorage.getItem("token"),
     },
   });
-  console.log(response.data);
-  return response.data;
+  console.log(response.data[0]);
+  return response.data[0];
 };
