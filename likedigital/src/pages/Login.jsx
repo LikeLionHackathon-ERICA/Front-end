@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { LoginAuth } from "../util";
 
 const Login = () => {
   const { userType } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -26,11 +27,19 @@ const Login = () => {
       const response = await LoginAuth(form);
       console.log("로그인 성공:", response.key);
       localStorage.setItem("token", `Token ${response.key}`);
+      localStorage.setItem("username", form.username);
+      navigate("/home");
     } catch (error) {
       console.error("로그인 실패:", error);
     }
     setIsLoading(false);
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home"); // 예: 사용자의 홈 페이지나 대시보드로 변경하세요.
+    }
+  }, [navigate]);
 
   const commonInputStyle =
     "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm";

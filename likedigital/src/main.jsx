@@ -50,7 +50,7 @@ const router = createBrowserRouter([
         element: <MatchPage />,
       },
       {
-        path: "mypage/:username",
+        path: "mypage",
         element: <Mypage />,
       },
     ],
