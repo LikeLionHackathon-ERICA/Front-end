@@ -28,6 +28,7 @@ const Login = () => {
       console.log("로그인 성공:", response.key);
       localStorage.setItem("token", `Token ${response.key}`);
       localStorage.setItem("username", form.username);
+      localStorage.setItem("userType", userType);
       navigate("/home");
     } catch (error) {
       console.error("로그인 실패:", error);

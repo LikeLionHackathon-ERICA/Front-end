@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderTitle from "../components/UI/HeaderTitle";
 import { useLocation } from "react-router-dom";
 import { getMyProfile } from "../util";
 import { GrLocation } from "react-icons/gr";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
 import InfoCard from "../components/mypage/InfoCard";
 function Mypage() {
   const location = useLocation();

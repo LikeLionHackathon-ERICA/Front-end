@@ -12,6 +12,7 @@ import ProblemDetail from "./pages/ProblemDetail.jsx";
 import MatchPage from "./pages/MatchPage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Mypage from "./pages/Mypage.jsx";
+import Class from "./pages/Class.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "mypage",
         element: <Mypage />,
+      },
+      {
+        path: "class",
+        element: <Class />,
       },
     ],
   },

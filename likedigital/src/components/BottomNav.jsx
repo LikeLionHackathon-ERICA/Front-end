@@ -1,12 +1,15 @@
-import React from "react";
 import { BsFillPencilFill, BsFillPersonFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
-import { IoDocumentText } from "react-icons/io5";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { MdOutlineClass } from "react-icons/md";
+import { BsFillPinMapFill } from "react-icons/bs";
+import { useLocation, Link } from "react-router-dom";
 const username = localStorage.getItem("username");
+const userType = localStorage.getItem("userType");
 const NAV_ITEMS = [
   { name: "홈화면", path: "/home", icon: AiFillHome },
-  { name: "커뮤니티", path: "/problem", icon: IoDocumentText },
+  userType === "receiver"
+    ? { name: "수업 목록", path: "/class", icon: MdOutlineClass }
+    : { name: "도움 지도", path: "/maps", icon: BsFillPinMapFill },
   { name: "문제 작성", path: "/register", icon: BsFillPencilFill },
   {
     name: "마이페이지",
@@ -16,7 +19,6 @@ const NAV_ITEMS = [
 ];
 
 export default function BottomNav() {
-  const navigate = useNavigate();
   const location = useLocation();
   return (
     <section className="fixed bottom-0 px-1 py-1 pt-2 bg-white text-primary w-full grid grid-cols-4 gap-6 rounded-t-2xl border-t-4 border-emerald-300">
