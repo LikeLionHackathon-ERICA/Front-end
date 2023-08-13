@@ -6,6 +6,7 @@ import {
 } from "../components/Register/ImageSection.jsx";
 import { CaptureModal } from "../components/Register/CaptureModal";
 import { useNavigate } from "react-router-dom";
+import HeaderTitle from "../components/UI/HeaderTitle";
 
 const Register = () => {
   const [title, setTitle] = useState("");
@@ -69,93 +70,99 @@ const Register = () => {
   };
 
   return (
-    <section className="flex flex-col p-4">
-      <div className="mb-4 text-start">
-        <h2 className="text-primary text-2xl">문제 등록</h2>
-        <span className="text-lg">곤란을 겪고 계신 문제를 설명해주세요</span>
-      </div>
-      <form className="space-y-2 flex flex-col flex-1" onSubmit={handleSubmit}>
-        <InputField
-          label="제목"
-          name="title"
-          type="text"
-          required
-          placeholder="제목을 입력해주세요."
-          value={title}
-          onChange={handleTitleChange}
-        />
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="showContent"
-            checked={showContent}
-            onChange={handleShowContentChange}
-          />
-          <label htmlFor="showContent" className="ml-2 text-lg">
-            내용 입력하기
-          </label>
+    <section className="flex flex-col">
+      <HeaderTitle />
+      <div className="px-8 p-4">
+        <div className="mb-4 text-start">
+          <h2 className="text-primary text-xl">문제 등록</h2>
+          <span className="text-lg">곤란을 겪고 계신 문제를 설명해주세요</span>
         </div>
-        {showContent && (
-          <TextAreaField
-            label="내용"
-            name="content"
+        <form
+          className="space-y-2 flex flex-col flex-1"
+          onSubmit={handleSubmit}
+        >
+          <InputField
+            label="제목"
+            name="title"
+            type="text"
             required
-            placeholder="내용을 입력해주세요."
-            value={content}
-            onChange={handleContentChange}
+            placeholder="제목을 입력해주세요."
+            value={title}
+            onChange={handleTitleChange}
           />
-        )}
-        <div>
-          <div className="flex gap-4 justify-between items-center">
-            <label htmlFor="file" className="block text-lg text-gray-700">
-              첨부파일
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="showContent"
+              checked={showContent}
+              onChange={handleShowContentChange}
+            />
+            <label htmlFor="showContent" className="ml-2 text-lg">
+              내용 입력하기
             </label>
+          </div>
+          {showContent && (
+            <TextAreaField
+              label="내용"
+              name="content"
+              required
+              placeholder="내용을 입력해주세요."
+              value={content}
+              onChange={handleContentChange}
+            />
+          )}
+          <div>
+            <div className="flex gap-4 justify-between items-center">
+              <label htmlFor="file" className="block text-lg text-gray-700">
+                첨부파일
+              </label>
+              <button
+                onClick={handleOpenModal}
+                className="bg-sky text-white px-2 rounded-md text-md"
+              >
+                화면 사진(스크린샷)을 찍는 방법
+              </button>
+            </div>
+            {isModalOpen && <CaptureModal onClose={handleCloseModal} />}
+            <div className="mt-2 flex space-x-2">
+              {previews.map((preview, index) => (
+                <ImagePreview key={index} src={preview} />
+              ))}
+              {previews.length < 4 && (
+                <ImageUploadButton onUpload={handleFileChange} />
+              )}
+            </div>
+          </div>
+          <div className="mt-auto">
             <button
-              onClick={handleOpenModal}
-              className="bg-sky text-white px-2 rounded-md text-md"
+              onClick={handleSubmitClick}
+              type="submit"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
             >
-              화면 사진(스크린샷)을 찍는 방법
+              질문 등록
             </button>
           </div>
-          {isModalOpen && <CaptureModal onClose={handleCloseModal} />}
-          <div className="mt-2 flex space-x-2">
-            {previews.map((preview, index) => (
-              <ImagePreview key={index} src={preview} />
-            ))}
-            {previews.length < 4 && (
-              <ImageUploadButton onUpload={handleFileChange} />
-            )}
+        </form>{" "}
+        {isSubmitModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white w-2/3 p-4 rounded-lg flex flex-col justify-center items-center">
+              <h3 className="mb-2 text-lg">어떤 방식을 선호하세요?</h3>
+              <button
+                onClick={() => handleModalChoice("전화로 도움받기")}
+                className="bg-sky text-white p-2 rounded-md w-full mb-2"
+              >
+                전화로 도움받기
+              </button>
+              <button
+                onClick={() => handleModalChoice("만나서 도움받기")}
+                className="bg-primary text-white p-2 rounded-md w-full"
+              >
+                만나서 도움받기
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="mt-auto">
-          <button
-            onClick={handleSubmitClick}
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-          >
-            질문 등록
-          </button>
-        </div>
-      </form>{" "}
-      {isSubmitModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white w-2/3 p-4 rounded-lg flex flex-col justify-center items-center">
-            <h3 className="mb-2 text-lg">어떤 방식을 선호하세요?</h3>
-            <button
-              onClick={() => handleModalChoice("전화로 도움받기")}
-              className="bg-sky text-white p-2 rounded-md w-full mb-2"
-            >
-              전화로 도움받기
-            </button>
-            <button
-              onClick={() => handleModalChoice("만나서 도움받기")}
-              className="bg-primary text-white p-2 rounded-md w-full"
-            >
-              만나서 도움받기
-            </button>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

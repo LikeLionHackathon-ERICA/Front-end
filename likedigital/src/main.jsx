@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
@@ -11,16 +10,22 @@ import Error from "./pages/Error.jsx";
 import SelectService from "./pages/SelectService.jsx";
 import ProblemDetail from "./pages/ProblemDetail.jsx";
 import MatchPage from "./pages/MatchPage.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import Mypage from "./pages/Mypage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/select-service",
+    path: "/",
     element: <SelectService />,
     index: true,
   },
   {
     path: "/login/:userType",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
   {
     path: "/",
@@ -44,12 +49,14 @@ const router = createBrowserRouter([
         path: "match/:id",
         element: <MatchPage />,
       },
+      {
+        path: "mypage",
+        element: <Mypage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );

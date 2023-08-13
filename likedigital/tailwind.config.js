@@ -6,8 +6,9 @@ export default {
       colors: {
         primary: "#39C088",
         sky: "#84CAEE",
+        question: "#FFF8CD",
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [],
 };

@@ -3,6 +3,33 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: "Poppins-ExtraBoldItalic";
+  src: url("./fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url("./fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  /* 500 */
+  font-family: "IBMPlexSansKR-Medium";
+  src: url("./fonts/IBMPlexSansKR-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  /* 600 */
+  font-family: "IBMPlexSansKR-SemiBold";
+  src: url("./fonts/IBMPlexSansKR-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
   font-family: "JUA";
   src: url("./fonts/BMJUA.ttf");
 }
@@ -19,7 +46,7 @@
 }
 
 .font-jua {
-  font-family: "JUA";
+  font-family: "IBMPlexSansKR-Medium";
 }
 
 .font-doh {
@@ -30,7 +57,7 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
-  font-family: "JUA";
+  font-family: "IBMPlexSansKR-Medium";
 }
 a {
   text-decoration: none;
