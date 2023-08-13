@@ -19,7 +19,7 @@ export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <section className="fixed bottom-0 px-1 py-1 pt-2 bg-primary text-white w-full grid grid-cols-4 gap-6 rounded-t-2xl">
+    <section className="fixed bottom-0 px-1 py-1 pt-2 bg-white text-primary w-full grid grid-cols-4 gap-6 rounded-t-2xl border-t-4 border-emerald-300">
       {NAV_ITEMS.map(({ name, path, icon: Icon }) => {
         const isActive = location.pathname.startsWith(path.split("?")[0]);
         return (
@@ -30,12 +30,12 @@ export default function BottomNav() {
           >
             <Icon
               className={`text-2xl ${
-                isActive ? "text-yellow-400" : "text-white"
+                isActive ? "text-yellow-400" : "text-primary"
               }`}
             />
             <span
               className={`text-sm ${
-                isActive ? "text-yellow-400" : "text-white"
+                isActive ? "text-yellow-400" : "text-primary"
               }`}
             >
               {name}
