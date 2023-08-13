@@ -1,0 +1,127 @@
+[
+  {
+    "title": "음악 스트리밍 서비스 이용법",
+    "user": { "username": "user1", "phone_number": "+8210100112345" },
+    "location": "강남구 동사무소",
+    "status": "closed",
+    "category": "학습/교육",
+    "matching_users": [
+      { "username": "user3", "phone_number": "+8210100312345" }
+    ],
+    "capacity": 10
+  },
+  {
+    "title": "스마트폰 기초 사용법",
+    "user": { "username": "user2", "phone_number": "+8210100212345" },
+    "location": "해운대구 동사무소",
+    "status": "closed",
+    "category": "건강/운동",
+    "matching_users": [
+      { "username": "user1", "phone_number": "+8210100112345" },
+      { "username": "user8", "phone_number": "+8210100812345" },
+      { "username": "user7", "phone_number": "+8210100712345" }
+    ],
+    "capacity": 9
+  },
+  {
+    "title": "인터넷뱅킹 시작하기",
+    "user": { "username": "user3", "phone_number": "+8210100312345" },
+    "location": "수성구 동사무소",
+    "status": "closed",
+    "category": "취미",
+    "matching_users": [
+      { "username": "user10", "phone_number": "+82101001012345" },
+      { "username": "user5", "phone_number": "+8210100512345" },
+      { "username": "user4", "phone_number": "+8210100412345" }
+    ],
+    "capacity": 19
+  },
+  {
+    "title": "편의점 택배 이용법",
+    "user": { "username": "user4", "phone_number": "+8210100412345" },
+    "location": "부평구 동사무소",
+    "status": "open",
+    "category": "기타",
+    "matching_users": [
+      { "username": "user3", "phone_number": "+8210100312345" },
+      { "username": "user2", "phone_number": "+8210100212345" },
+      { "username": "user9", "phone_number": "+8210100912345" }
+    ],
+    "capacity": 11
+  },
+  {
+    "title": "온라인 쇼핑몰에서 주문하기",
+    "user": { "username": "user5", "phone_number": "+8210100512345" },
+    "location": "북구 동사무소",
+    "status": "closed",
+    "category": "학습/교육",
+    "matching_users": [
+      { "username": "user2", "phone_number": "+8210100212345" }
+    ],
+    "capacity": 7
+  },
+  {
+    "title": "SNS 계정 만들기",
+    "user": { "username": "user6", "phone_number": "+8210100612345" },
+    "location": "중구 동사무소",
+    "status": "closed",
+    "category": "건강/운동",
+    "matching_users": [
+      { "username": "user3", "phone_number": "+8210100312345" }
+    ],
+    "capacity": 8
+  },
+  {
+    "title": "온라인 도서관 이용법",
+    "user": { "username": "user7", "phone_number": "+8210100712345" },
+    "location": "남구 동사무소",
+    "status": "ongoing",
+    "category": "취미",
+    "matching_users": [
+      { "username": "user7", "phone_number": "+8210100712345" },
+      { "username": "user8", "phone_number": "+8210100812345" },
+      { "username": "user2", "phone_number": "+8210100212345" },
+      { "username": "user1", "phone_number": "+8210100112345" }
+    ],
+    "capacity": 11
+  },
+  {
+    "title": "비디오통화 시작하기",
+    "user": { "username": "user8", "phone_number": "+8210100812345" },
+    "location": "세종시 동사무소",
+    "status": "closed",
+    "category": "기타",
+    "matching_users": [
+      { "username": "user9", "phone_number": "+8210100912345" },
+      { "username": "user5", "phone_number": "+8210100512345" },
+      { "username": "user3", "phone_number": "+8210100312345" },
+      { "username": "user7", "phone_number": "+8210100712345" }
+    ],
+    "capacity": 18
+  },
+  {
+    "title": "전자책 사용법",
+    "user": { "username": "user9", "phone_number": "+8210100912345" },
+    "location": "수원시 동사무소",
+    "status": "ongoing",
+    "category": "학습/교육",
+    "matching_users": [
+      { "username": "user7", "phone_number": "+8210100712345" }
+    ],
+    "capacity": 6
+  },
+  {
+    "title": "디지털 카메라 기초",
+    "user": { "username": "user10", "phone_number": "+82101001012345" },
+    "location": "강릉시 동사무소",
+    "status": "ongoing",
+    "category": "건강/운동",
+    "matching_users": [
+      { "username": "user6", "phone_number": "+8210100612345" },
+      { "username": "user9", "phone_number": "+8210100912345" },
+      { "username": "user10", "phone_number": "+82101001012345" },
+      { "username": "user3", "phone_number": "+8210100312345" }
+    ],
+    "capacity": 17
+  }
+]
