@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HeaderTitle from "../components/UI/HeaderTitle";
 import SelectInput from "../components/classpage/SelectInput";
 import ClassCard from "../components/classpage/ClassCard";
