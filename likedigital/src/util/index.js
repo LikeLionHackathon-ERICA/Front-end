@@ -29,3 +29,19 @@ export const getMyProfile = async () => {
   console.log(response.data[0]);
   return response.data[0];
 };
+
+export const getAllClass = async () => {
+  const response = await axios.get(`${BASE_URL}/class/`);
+  console.log(response);
+  return response.data;
+};
+
+export const registerClass = async (classId) => {
+  const response = await axios.post(`${BASE_URL}/class/${classId}`, {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+  console.log(response);
+  return response.data;
+};
