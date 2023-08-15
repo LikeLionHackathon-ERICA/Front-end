@@ -3,6 +3,8 @@ import HeaderTitle from "../components/UI/HeaderTitle";
 import { GrLocation } from "react-icons/gr";
 import InfoCard from "../components/mypage/InfoCard";
 import { useProfile } from "../context/ProfileProvider";
+import { useFetchClasses } from "../hook/useFetchClasses";
+import { getAllProblem } from "../util";
 function Mypage() {
   const { profile, locationName } = useProfile();
   const [isSolved, setIsSolved] = useState(true);
@@ -11,13 +13,25 @@ function Mypage() {
     "신한은행 인터넷뱅킹 ",
     "요금제 바꾸는 방법",
   ];
-
+  const { classes, loading } = useFetchClasses();
   if (!profile) {
     return <div>에러가 있습니다.</div>;
   }
+  const handleTestButtonClick = async () => {
+    try {
+      const result = await getAllProblem();
+      console.log(result);
+    } catch (error) {
+      console.error("Error uploading problem:", error);
+    }
+  };
+
   return (
     <section>
       <HeaderTitle />
+      <button id="test" onClick={handleTestButtonClick}>
+        테스트
+      </button>
       <div className="w-full flex items-center px-8 gap-4 mt-8">
         <img className="w-24 h-24" src="imgs/profile1.png" alt="profile" />
         <div className="flex flex-col justify-between items-center gap-2">
@@ -53,11 +67,11 @@ function Mypage() {
       {/* 내가 신청한 수업 */}
       <div className="flex flex-col items-center justify-center gap-2 mt-6 px-8">
         <div className="flex items-center justify-between w-full mb-2">
-          <h2 className="text-textGray text-lg font-bold">내가 쓴 글</h2>
+          <h2 className="text-textGray text-lg font-bold">신청한 클래스</h2>
           <button className="text-primary text-sm font-bold">더보기</button>
         </div>
-        {titles.map((title, index) => (
-          <PostCard key={index} isSolved={isSolved} title={title} />
+        {classes.map((title, index) => (
+          <PostCard key={index} isSolved={isSolved} title={title.title} />
         ))}
       </div>
     </section>

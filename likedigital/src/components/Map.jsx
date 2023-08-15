@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 const { kakao } = window;

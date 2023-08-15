@@ -22,7 +22,7 @@ export const receiverNavItems = [
 export const providerNavItems = [
   { name: "홈화면", path: "/home", icon: AiFillHome },
   { name: "도움 지도", path: "/maps", icon: MdOutlineClass },
-  { name: "문제 목록", path: "/posts", icon: BsCardChecklist },
+  { name: "문제 목록", path: "/problem", icon: BsCardChecklist },
   {
     name: "마이페이지",
     path: `/mypage?username=${username}`,

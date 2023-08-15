@@ -14,6 +14,7 @@ import SignUp from "./pages/SignUp.jsx";
 import Mypage from "./pages/Mypage.jsx";
 import Class from "./pages/Class.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
+import Maps from "./pages/Maps.jsx";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "class/:id",
         element: <ClassDetail />,
+      },
+      {
+        path: "maps",
+        element: <Maps />,
       },
     ],
   },

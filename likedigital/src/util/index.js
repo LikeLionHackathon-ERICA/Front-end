@@ -45,3 +45,48 @@ export const registerClass = async (classId) => {
   console.log(response);
   return response.data;
 };
+
+export const getAllProblem = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/posts/`);
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error uploading problem:", error);
+    throw error;
+  }
+};
+
+export const uploadProblem = async () => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/posts/`,
+      {
+        title: "편의점 택배보내기",
+        user: {
+          username: "TESTIDTESTID",
+          phone_number: "+821033339999",
+        },
+        lat: 34,
+        lon: 56,
+        status: "매칭 완료",
+        category: "기타",
+        matching_user: {
+          username: "해결사1",
+          phone_number: "+821010101999",
+        },
+      },
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    );
+
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error uploading problem:", error);
+    throw error;
+  }
+};
