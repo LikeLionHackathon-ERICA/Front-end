@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
+import HeaderTitle from "../components/UI/HeaderTitle";
 const { kakao } = window;
 
 function Maps() {
   const [address, setAddress] = useState("");
   const [buildingName, setBuildingName] = useState("");
   const [posts, setPosts] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null); // 선택된 post를 추적하는 상태
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(null); // 추가
   const mapRef = useRef(null);
-
+  const defaultMarkerImageSrc = "/imgs/marker/Vector_1.png";
+  const selectedMarkerImageSrc = "/imgs/marker/Vector.png";
   useEffect(() => {
     axios
       .get("/data/posts.json")
@@ -31,6 +34,7 @@ function Maps() {
           const options = {
             center: new kakao.maps.LatLng(lat, lng),
             level: 3,
+            disableDoubleClickZoom: true,
             zoomable: false,
             scrollwheel: false,
           };
@@ -78,36 +82,76 @@ function Maps() {
 
   useEffect(() => {
     if (mapRef.current && posts.length > 0) {
+      const imageSize = new kakao.maps.Size(24, 24);
+      const markerImage = new kakao.maps.MarkerImage(
+        defaultMarkerImageSrc,
+        imageSize
+      );
+      const selectedMarkerImage = new kakao.maps.MarkerImage(
+        selectedMarkerImageSrc,
+        imageSize
+      );
+
       posts.forEach((post) => {
         const postPosition = new kakao.maps.LatLng(post.lat, post.lon);
         const postMarker = new kakao.maps.Marker({
           position: postPosition,
+          image: markerImage,
         });
         postMarker.setMap(mapRef.current);
 
         kakao.maps.event.addListener(postMarker, "click", function () {
-          setSelectedPost(post); // 마커 클릭 시 해당 post를 선택
+          setSelectedPost(post);
+          mapRef.current.setCenter(postPosition);
+
+          // 이전 선택된 마커 이미지를 기본 이미지로 변경
+          if (selectedMarker) {
+            selectedMarker.setImage(markerImage);
+          }
+
+          // 현재 선택된 마커 이미지 변경
+          postMarker.setImage(selectedMarkerImage);
+
+          // 현재 선택된 마커를 상태로 저장
+          setSelectedMarker(postMarker);
         });
       });
     }
-  }, [posts, mapRef.current]);
+  }, [posts, mapRef.current, selectedMarker]);
 
   return (
     <section>
-      <div id="map" className="w-full h-[500px]" />
-      <h1 className="text-center text-xl">{address}</h1>
-      <h2 className="text-center text-lg">{buildingName}</h2>
-      {selectedPost && (
-        <div>
-          <h3>{selectedPost.title}</h3>
-          <p>Username: {selectedPost.user.username}</p>
-          <p>Phone: {selectedPost.user.phone_number}</p>
-          <p>Status: {selectedPost.status}</p>
-          <p>Category: {selectedPost.category}</p>
-        </div>
-      )}
+      <HeaderTitle />
+      <div id="map" className="w-full h-[65vh]" />
+      {selectedPost && <PostCard post={selectedPost} />}
+      {/* <h1 className="text-center text-xl">{address}</h1> */}
     </section>
   );
 }
 
 export default Maps;
+
+function PostCard({ post }) {
+  console.log(post);
+  return (
+    <div className=" relative flex gap-2 flex-col px-2 py-4 border-2 border-black rounded-lg mt-1 mx-[0.5px]">
+      <div className="flex items-center justify-between px-4">
+        <h1 className="text-xl font-bold text-primary">{post.title}</h1>
+        <p className="px-2 py-1 rounded-lg border-2 w-fit">{post.category}</p>
+      </div>
+      <div className="flex items-center justify-between px-4">
+        <span>{post.user.username}님</span>
+        <button className="p-2 bg-primary text-white w-fit py-1 rounded-lg">
+          신청하기
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// <a
+//   className="p-2 bg-primary text-white w-fit py-1 rounded-lg"
+//   href={`tel:${post.user.phone_number}`}
+// >
+//   전화하기
+// </a>;

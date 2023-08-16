@@ -5,7 +5,7 @@
       "username": "john_doe",
       "phone_number": "+821012345678"
     },
-    "lat": 37.2977233,
+    "lat": 37.2978933,
     "lon": 126.8374603,
     "status": "open",
     "category": "기술",
@@ -20,7 +20,7 @@
       "username": "jane_doe",
       "phone_number": "+821023456789"
     },
-    "lat": 37.2975433,
+    "lat": 37.2974033,
     "lon": 126.8372803,
     "status": "matched",
     "category": "금융",
@@ -35,7 +35,7 @@
       "username": "plant_lover",
       "phone_number": "+821034567890"
     },
-    "lat": 37.2976033,
+    "lat": 37.2963033,
     "lon": 126.8374203,
     "status": "open",
     "category": "생활",
@@ -50,7 +50,7 @@
       "username": "language_learner",
       "phone_number": "+821045678901"
     },
-    "lat": 37.2976633,
+    "lat": 37.2956633,
     "lon": 126.8373203,
     "status": "matched",
     "category": "교육",
