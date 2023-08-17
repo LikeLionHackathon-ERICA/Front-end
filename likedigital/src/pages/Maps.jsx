@@ -1,27 +1,19 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import HeaderTitle from "../components/UI/HeaderTitle";
+import { useNavigate } from "react-router-dom";
+import usePosts from "../hook/usePosts";
 const { kakao } = window;
 
 function Maps() {
-  const [address, setAddress] = useState("");
-  const [buildingName, setBuildingName] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [selectedCircle, setSelectedCircle] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
-  const [selectedMarker, setSelectedMarker] = useState(null); // 추가
+  const [nearbyPostsCount, setNearbyPostsCount] = useState(0);
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const mapRef = useRef(null);
   const defaultMarkerImageSrc = "/imgs/marker/Vector_1.png";
   const selectedMarkerImageSrc = "/imgs/marker/Vector.png";
-  useEffect(() => {
-    axios
-      .get("/data/posts.json")
-      .then((response) => {
-        setPosts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching the posts", error);
-      });
-  }, []);
+  const posts = usePosts();
 
   useEffect(() => {
     kakao.maps.load(() => {
@@ -45,33 +37,44 @@ function Maps() {
           const circleOptions = {
             center: new kakao.maps.LatLng(lat, lng),
             radius: 10,
-            fillColor: "red",
+            fillColor: "blue",
             fillOpacity: 1,
             strokeWeight: 0,
           };
           const circle = new kakao.maps.Circle(circleOptions);
           circle.setMap(map);
 
-          kakao.maps.event.addListener(map, "dragend", function () {
-            const position = map.getCenter();
+          axios
+            .get("/data/posts.json")
+            .then((response) => {
+              let count = 0;
+              const imageSize = new kakao.maps.Size(24, 24);
+              const markerImage = new kakao.maps.MarkerImage(
+                defaultMarkerImageSrc,
+                imageSize
+              );
 
-            const geocoder = new kakao.maps.services.Geocoder();
-            geocoder.coord2Address(
-              position.getLng(),
-              position.getLat(),
-              function (result, status) {
-                if (status === kakao.maps.services.Status.OK) {
-                  const addressData = result[0];
-                  setAddress(
-                    addressData.road_address
-                      ? addressData.road_address.address_name
-                      : addressData.address.address_name
-                  );
-                  setBuildingName(addressData.address.building_name || "");
-                }
-              }
-            );
-          });
+              response.data.forEach((post) => {
+                const postPosition = new kakao.maps.LatLng(post.lat, post.lon);
+                const postMarker = new kakao.maps.Marker({
+                  position: postPosition,
+                  image: markerImage,
+                });
+                postMarker.setMap(map);
+                const distance = getDistance(lat, lng, post.lat, post.lon);
+                if (distance <= 500) count++;
+
+                kakao.maps.event.addListener(postMarker, "click", function () {
+                  setSelectedPost(post);
+                  map.setCenter(postPosition);
+                });
+              });
+              setNearbyPostsCount(count);
+              console.log(`근처 500m 이내의 게시물 수: ${nearbyPostsCount}`);
+            })
+            .catch((error) => {
+              console.error("Error fetching the posts", error);
+            });
         },
         (error) => {
           console.error("Geolocation is not supported or permission denied.");
@@ -83,13 +86,18 @@ function Maps() {
   useEffect(() => {
     if (mapRef.current && posts.length > 0) {
       const imageSize = new kakao.maps.Size(24, 24);
+      const imageOffset = new kakao.maps.Point(12, 12);
       const markerImage = new kakao.maps.MarkerImage(
         defaultMarkerImageSrc,
-        imageSize
+        imageSize,
+        null,
+        imageOffset
       );
       const selectedMarkerImage = new kakao.maps.MarkerImage(
         selectedMarkerImageSrc,
-        imageSize
+        imageSize,
+        null,
+        imageOffset
       );
 
       posts.forEach((post) => {
@@ -104,27 +112,65 @@ function Maps() {
           setSelectedPost(post);
           mapRef.current.setCenter(postPosition);
 
-          // 이전 선택된 마커 이미지를 기본 이미지로 변경
           if (selectedMarker) {
             selectedMarker.setImage(markerImage);
           }
 
-          // 현재 선택된 마커 이미지 변경
           postMarker.setImage(selectedMarkerImage);
-
-          // 현재 선택된 마커를 상태로 저장
           setSelectedMarker(postMarker);
+
+          if (selectedCircle) {
+            selectedCircle.setMap(null);
+          }
+
+          const circleCenter = new kakao.maps.LatLng(
+            post.lat + 0.0001,
+            post.lon
+          );
+
+          const circleOptions = {
+            center: circleCenter,
+            radius: 20,
+            fillColor: "#39C088",
+            fillOpacity: 0.5,
+            strokeColor: "#33AC7A",
+            strokeWeight: 4,
+            strokeOpacity: 0.8,
+          };
+          const circle = new kakao.maps.Circle(circleOptions);
+          circle.setMap(mapRef.current);
+          setSelectedCircle(circle);
         });
       });
     }
   }, [posts, mapRef.current, selectedMarker]);
 
+  function getDistance(lat1, lon1, lat2, lon2) {
+    var radlat1 = (Math.PI * lat1) / 180;
+    var radlat2 = (Math.PI * lat2) / 180;
+    var theta = lon1 - lon2;
+    var radtheta = (Math.PI * theta) / 180;
+    var dist =
+      Math.sin(radlat1) * Math.sin(radlat2) +
+      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    dist = Math.acos(dist);
+    dist = (dist * 180) / Math.PI;
+    dist = dist * 60 * 1.1515;
+    dist = dist * 1.609344; // Kilometers
+    dist = dist * 1000; // Meters
+    return dist;
+  }
+
   return (
     <section>
       <HeaderTitle />
-      <div id="map" className="w-full h-[65vh]" />
+      <div id="map" className="relative w-full h-[65vh]">
+        <span className="absolute top-2 left-4 bg-white p-2 rounded-lg shadow-md z-40">
+          근처 도움 요청 건수 : {nearbyPostsCount}
+        </span>
+      </div>
+
       {selectedPost && <PostCard post={selectedPost} />}
-      {/* <h1 className="text-center text-xl">{address}</h1> */}
     </section>
   );
 }
@@ -132,26 +178,27 @@ function Maps() {
 export default Maps;
 
 function PostCard({ post }) {
-  console.log(post);
+  const navigate = useNavigate();
+  const HandleMatchingPost = (id) => {
+    localStorage.setItem("PostId", id);
+    navigate(`/posts/${id}`);
+  };
   return (
-    <div className=" relative flex gap-2 flex-col px-2 py-4 border-2 border-black rounded-lg mt-1 mx-[0.5px]">
+    <div className="relative flex gap-2 flex-col px-2 py-4 border-2 border-black rounded-lg mt-1 mx-[0.5px]">
       <div className="flex items-center justify-between px-4">
         <h1 className="text-xl font-bold text-primary">{post.title}</h1>
         <p className="px-2 py-1 rounded-lg border-2 w-fit">{post.category}</p>
       </div>
       <div className="flex items-center justify-between px-4">
         <span>{post.user.username}님</span>
-        <button className="p-2 bg-primary text-white w-fit py-1 rounded-lg">
+        <button
+          onClick={() => HandleMatchingPost(post.id)}
+          to={`/posts/${post.id}`}
+          className="p-2 bg-primary text-white w-fit py-1 rounded-lg"
+        >
           신청하기
         </button>
       </div>
     </div>
   );
 }
-
-// <a
-//   className="p-2 bg-primary text-white w-fit py-1 rounded-lg"
-//   href={`tel:${post.user.phone_number}`}
-// >
-//   전화하기
-// </a>;

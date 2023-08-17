@@ -15,6 +15,7 @@ import Mypage from "./pages/Mypage.jsx";
 import Class from "./pages/Class.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
 import Maps from "./pages/Maps.jsx";
+import PostsPage from "./pages/PostsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "problem",
+        path: "posts/list",
         element: <ProblemView />,
       },
       {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "maps",
         element: <Maps />,
+      },
+      {
+        path: "posts/:id",
+        element: <PostsPage />,
       },
     ],
   },
