@@ -54,7 +54,7 @@
   padding-left: 15px;
   padding-top: 20px;
   background-image: url("./assets/event1.png");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
