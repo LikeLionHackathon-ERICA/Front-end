@@ -18,7 +18,7 @@ export default function SelectService() {
             alt="Bear"
           />
           <div
-            onClick={() => navigate("/login/receiver")}
+            onClick={() => navigate("/login/provider")}
             className={`bg-sky border-sky ${BTN_STYLE}`}
           >
             <span className="text-sky">Question</span>
@@ -32,7 +32,7 @@ export default function SelectService() {
             alt="Bear"
           />
           <div
-            onClick={() => navigate("/login/provider")}
+            onClick={() => navigate("/login/receiver")}
             className={`bg-primary border-primary ${BTN_STYLE}`}
           >
             <span className="text-primary">Answer</span>
