@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { getMyProfile } from "../util";
-
+const { kakao } = window;
 const ProfileContext = createContext();
 
 export function useProfile() {
@@ -30,7 +30,7 @@ export function ProfileProvider({ children }) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         // Kakao Map Geocoder를 사용하여 위도, 경도를 주소로 변환
-        const geocoder = new window.kakao.maps.services.Geocoder();
+        const geocoder = new kakao.maps.services.Geocoder();
         geocoder.coord2RegionCode(lon, lat, (result, status) => {
           if (status === window.kakao.maps.services.Status.OK) {
             for (let i = 0; i < result.length; i++) {
