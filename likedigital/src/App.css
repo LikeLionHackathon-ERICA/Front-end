@@ -231,7 +231,7 @@
 .guide-container {
   padding-left: 15px;
   padding-right: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .guide-box {
@@ -244,11 +244,9 @@
   border-radius: 10px;
   font-size: 80%;
   font-family: "IBMPlexSansKR-Medium";
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   color: #484848;
-  text-align: right;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .mq_container {
@@ -333,4 +331,36 @@
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 50px;
+}
+
+.dots_custom {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto 0;
+  padding: 0;
+  text-align: center;
+}
+
+.dots_custom li {
+  list-style: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 6px;
+  padding: 0;
+}
+
+.dots_custom li button {
+  border: none;
+  background: #d1d1d1;
+  color: transparent;
+  cursor: pointer;
+  display: block;
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  padding: 0;
+}
+
+.dots_custom li.slick-active button {
+  background-color: #ffbf47;
 }

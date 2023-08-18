@@ -14,6 +14,7 @@ class Event extends React.Component {
       autoplay: true,
       autoplaySpeed: 5000,
     };
+
     return (
       <Slider {...settings}>
         <div className="event-container">
