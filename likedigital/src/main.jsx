@@ -9,11 +9,13 @@ import ProblemView from "./pages/ProblemView.jsx";
 import Error from "./pages/Error.jsx";
 import SelectService from "./pages/SelectService.jsx";
 import ProblemDetail from "./pages/ProblemDetail.jsx";
-import MatchPage from "./pages/MatchPage.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Mypage from "./pages/Mypage.jsx";
 import Class from "./pages/Class.jsx";
 import ClassDetail from "./pages/ClassDetail.jsx";
+import Maps from "./pages/Maps.jsx";
+import PostsPage from "./pages/PostsPage.jsx";
+import Map from "./components/Map.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,17 +42,18 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "problem",
+        path: "register/map",
+        element: <Map />,
+      },
+      {
+        path: "posts/list",
         element: <ProblemView />,
       },
       {
         path: "problem/:id",
         element: <ProblemDetail />,
       },
-      {
-        path: "match/:id",
-        element: <MatchPage />,
-      },
+
       {
         path: "mypage",
         element: <Mypage />,
@@ -62,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: "class/:id",
         element: <ClassDetail />,
+      },
+      {
+        path: "maps",
+        element: <Maps />,
+      },
+      {
+        path: "posts/:id",
+        element: <PostsPage />,
       },
     ],
   },
