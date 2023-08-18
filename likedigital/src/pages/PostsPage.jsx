@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import usePosts from "../hook/usePosts";
 import HeaderTitle from "../components/UI/HeaderTitle";
 import { BiSolidPhoneCall } from "react-icons/bi";
-import { haversine } from "../util";
+import { deletePost, getAllProblem, haversine } from "../util";
 const { kakao } = window;
 
 function PostsPage() {
@@ -87,8 +87,13 @@ function PostsPage() {
   return (
     <section>
       <HeaderTitle />
+
       <div className="flex flex-col justify-center items-center gap-2 py-4 px-1">
-        <h1 className="text-2xl">매칭 완료</h1>
+        <h1 className="text-2xl">
+          {user_type === "provider" && !post.matching_user
+            ? "매칭 완료"
+            : "매칭 중"}
+        </h1>
         <h1 className="text-2xl text-center px-4 py-2 text-primary font-bold w-full">
           {post.title}
         </h1>
@@ -143,6 +148,7 @@ function MatchInfoCard({ post }) {
 }
 
 function MatchReceiverInfoCard({ post }) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const matching_user =
     post.matching_user?.username === undefined
@@ -167,6 +173,7 @@ function MatchReceiverInfoCard({ post }) {
       <button
         onClick={() => {
           localStorage.removeItem("PostId");
+          deletePost(id);
           navigate("/posts/null");
         }}
         className="bg-red-400 text-white rounded-md px-2 py-1 text-xl mt-2"

@@ -25,16 +25,13 @@ function Mypage() {
 
   useEffect(() => {
     handleTestButtonClick();
-  });
+  }, []);
   if (!profile) {
     return <div>에러가 있습니다.</div>;
   }
   return (
     <section>
       <HeaderTitle />
-      <button id="test" onClick={handleTestButtonClick}>
-        테스트
-      </button>
       <div className="w-full flex items-center px-8 gap-4 mt-8">
         <img className="w-24 h-24" src="imgs/profile1.png" alt="profile" />
         <div className="flex flex-col justify-between items-center gap-2">

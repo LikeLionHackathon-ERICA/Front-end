@@ -15,7 +15,7 @@ export default function BottomNav() {
   const [postId, setPostId] = useState(localStorage.getItem("PostId")); // 상태 추가
   useEffect(() => {
     setPostId(localStorage.getItem("PostId")); // 로컬 스토리지 값이 변경되면 상태 업데이트
-  }, []); // location 변경 시에만 useEffect 실행
+  }, [postId]); // location 변경 시에만 useEffect 실행
 
   const receiverNavItems = [
     { name: "매칭화면", path: `/posts/${postId}`, icon: AiFillHome },
@@ -35,14 +35,14 @@ export default function BottomNav() {
       icon: AiFillHome,
     },
     { name: "도움 지도", path: "/maps", icon: MdOutlineClass },
-    { name: "문제 목록", path: "/problem", icon: BsCardChecklist },
+    { name: "문제 목록", path: "/posts/list", icon: BsCardChecklist },
     {
       name: "마이페이지",
       path: `/mypage?username=${username}`,
       icon: BsFillPersonFill,
     },
   ];
-  const restrictedPaths = ["/maps", "/problem", "/register"];
+  const restrictedPaths = ["/maps", "/posts/list", "/register"];
 
   const NAV_ITEMS =
     userType === "receiver" ? receiverNavItems : providerNavItems;

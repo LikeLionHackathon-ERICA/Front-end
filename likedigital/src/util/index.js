@@ -30,9 +30,24 @@ export const getMyProfile = async () => {
 };
 
 export const getAllClass = async () => {
-  const response = await axios.get(`${BASE_URL}/class/`);
+  const response = await axios.get(`${BASE_URL}/classes/`);
   console.log(response);
   return response.data;
+};
+
+export const deletePost = async (postId) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/posts/${postId}/`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return true;
 };
 
 export const registerClass = async (classId) => {

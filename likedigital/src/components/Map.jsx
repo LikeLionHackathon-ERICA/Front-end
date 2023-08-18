@@ -19,7 +19,6 @@ export default function Map() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       await uploadProblem({
         title: title,
@@ -29,7 +28,7 @@ export default function Map() {
         phone_number: profile.phone_number,
       });
       alert("문제가 성공적으로 등록되었습니다.");
-      navigate(`/posts/${localStorage.getItem("PostId")}}`);
+      navigate(`/posts/${localStorage.getItem("PostId")}`);
     } catch (error) {
       console.error("Error during problem submission:", error);
       alert("문제 등록 중 오류가 발생했습니다. 다시 시도해주세요.");
