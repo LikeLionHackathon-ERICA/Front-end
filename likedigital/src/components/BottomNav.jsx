@@ -42,7 +42,7 @@ export default function BottomNav() {
       icon: BsFillPersonFill,
     },
   ];
-  const restrictedPaths = ["/maps", "/problem"];
+  const restrictedPaths = ["/maps", "/problem", "/register"];
 
   const NAV_ITEMS =
     userType === "receiver" ? receiverNavItems : providerNavItems;

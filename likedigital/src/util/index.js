@@ -26,7 +26,6 @@ export const getMyProfile = async () => {
       Authorization: localStorage.getItem("token"),
     },
   });
-  console.log(response.data[0]);
   return response.data[0];
 };
 

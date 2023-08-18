@@ -1,31 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderTitle from "../components/UI/HeaderTitle";
 import { GrLocation } from "react-icons/gr";
 import InfoCard from "../components/mypage/InfoCard";
 import { useProfile } from "../context/ProfileProvider";
 import { useFetchClasses } from "../hook/useFetchClasses";
-import { getAllProblem } from "../util";
+import { getAllProblem, getMyProfile } from "../util";
 function Mypage() {
   const { profile, locationName } = useProfile();
   const [isSolved, setIsSolved] = useState(true);
-  const titles = [
-    "편의점 택배 하는방법",
-    "신한은행 인터넷뱅킹 ",
-    "요금제 바꾸는 방법",
-  ];
   const { classes, loading } = useFetchClasses();
-  if (!profile) {
-    return <div>에러가 있습니다.</div>;
-  }
+  const [titleChange, setTitleChange] = useState(false);
+  const [titles, setTitles] = useState(null);
+
   const handleTestButtonClick = async () => {
     try {
-      const result = await getAllProblem();
-      console.log(result);
+      setTitleChange(false);
+      const result = await getMyProfile();
+      const titlesArray = await result.posts.map((post) => post.title);
+      setTitles(titlesArray);
     } catch (error) {
       console.error("Error uploading problem:", error);
     }
   };
 
+  useEffect(() => {
+    handleTestButtonClick();
+  });
+  if (!profile) {
+    return <div>에러가 있습니다.</div>;
+  }
   return (
     <section>
       <HeaderTitle />
@@ -49,22 +52,19 @@ function Mypage() {
         <div className="flex items-center gap-4 px-2">
           <InfoCard title="유저 타입" content={profile.user_type} />
           <InfoCard title="누적 도움" content={profile.score} />
-          {/* 관심사로 변경 */}
           <InfoCard title="누적 도움" content={profile.score} />
         </div>
       </div>
 
-      {/* 글목록 세션 */}
       <div className="flex flex-col items-center justify-center gap-2 mt-6 px-8">
         <div className="flex items-center justify-between w-full mb-2">
           <h2 className="text-textGray text-lg font-bold">내가 쓴 글</h2>
           <button className="text-primary text-sm font-bold">더보기</button>
         </div>
-        {titles.map((title, index) => (
+        {titles?.map((title, index) => (
           <PostCard key={index} isSolved={isSolved} title={title} />
         ))}
       </div>
-      {/* 내가 신청한 수업 */}
       <div className="flex flex-col items-center justify-center gap-2 mt-6 px-8">
         <div className="flex items-center justify-between w-full mb-2">
           <h2 className="text-textGray text-lg font-bold">신청한 클래스</h2>

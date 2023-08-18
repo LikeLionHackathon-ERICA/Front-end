@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import usePosts from "../hook/usePosts";
 import HeaderTitle from "../components/UI/HeaderTitle";
 import { BiSolidPhoneCall } from "react-icons/bi";
@@ -13,6 +13,7 @@ function PostsPage() {
   const [currentPosition, setCurrentPosition] = useState(null);
   const [distance, setDistance] = useState(null);
   const user_type = localStorage.getItem("userType");
+  const navigate = useNavigate();
   useEffect(() => {
     setPost(posts.find((p) => p.id === parseInt(id)));
   }, [posts, id]);
@@ -99,13 +100,25 @@ function PostsPage() {
           )}
         </div>
         <div className="my-2">
-          <span>
-            거리: {distance ? `${distance.toFixed(2)}m` : "계산중..."}
-          </span>
+          {user_type !== "receiver" || post.matching_user ? (
+            <span>
+              거리: {distance ? `${distance.toFixed(2)}m` : "계산중..."}
+            </span>
+          ) : null}
         </div>
+
+        {user_type === "receiver" && !post.matching_user ? (
+          <div className="h-full flex flex-col justify-center items-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary mb-4"></div>
+            <h3 className="text-xl font-semibold">매칭 중입니다</h3>
+          </div>
+        ) : null}
+
         <div
           id="mini-map"
-          className="w-full h-[400px] border-4 rounded-xl border-primary"
+          className={`w-full h-[400px] border-4 rounded-xl border-primary ${
+            user_type === "receiver" && !post.matching_user ? "opacity-0" : ""
+          }`}
         />
       </div>
     </section>
@@ -130,6 +143,7 @@ function MatchInfoCard({ post }) {
 }
 
 function MatchReceiverInfoCard({ post }) {
+  const navigate = useNavigate();
   const matching_user =
     post.matching_user?.username === undefined
       ? "매칭된 사용자가 없습니다"
@@ -150,6 +164,15 @@ function MatchReceiverInfoCard({ post }) {
           전화문의
         </a>
       )}
+      <button
+        onClick={() => {
+          localStorage.removeItem("PostId");
+          navigate("/posts/null");
+        }}
+        className="bg-red-400 text-white rounded-md px-2 py-1 text-xl mt-2"
+      >
+        매칭 취소하기
+      </button>
     </div>
   );
 }
