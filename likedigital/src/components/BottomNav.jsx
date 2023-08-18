@@ -15,10 +15,10 @@ export default function BottomNav() {
   const [postId, setPostId] = useState(localStorage.getItem("PostId")); // 상태 추가
   useEffect(() => {
     setPostId(localStorage.getItem("PostId")); // 로컬 스토리지 값이 변경되면 상태 업데이트
-  }, [location]); // location 변경 시에만 useEffect 실행
+  }, []); // location 변경 시에만 useEffect 실행
 
   const receiverNavItems = [
-    { name: "홈화면", path: "/posts", icon: AiFillHome },
+    { name: "매칭화면", path: `/posts/${postId}`, icon: AiFillHome },
     { name: "수업 목록", path: "/class", icon: MdOutlineClass },
     { name: "문제 작성", path: "/register", icon: BsFillPencilFill },
     {

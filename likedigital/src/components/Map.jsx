@@ -1,12 +1,42 @@
 import { useEffect, useState } from "react";
 import { BiChevronLeft } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMyProfile } from "../hook/useMyProfile";
+import { uploadProblem } from "../util";
 const { kakao } = window;
 
 export default function Map() {
   const [address, setAddress] = useState(""); // 주소 상태
+  const [lat, setLat] = useState(""); // 위도 상태
+  const [lon, setLon] = useState(""); // 경도 상태
+  const {
+    state: { title },
+  } = useLocation();
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
+  const { profile } = useMyProfile();
+
   const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      await uploadProblem({
+        title: title,
+        lat: lat,
+        lon: lon,
+        username: profile.username,
+        phone_number: profile.phone_number,
+      });
+      alert("문제가 성공적으로 등록되었습니다.");
+      navigate(`/posts/${localStorage.getItem("PostId")}}`);
+    } catch (error) {
+      console.error("Error during problem submission:", error);
+      alert("문제 등록 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const container = document.getElementById("map");
@@ -40,7 +70,8 @@ export default function Map() {
         // 마커 드래그 종료 이벤트
         kakao.maps.event.addListener(marker, "dragend", function () {
           const position = marker.getPosition();
-
+          setLat(position.getLat()); // 위도 상태 업데이트
+          setLon(position.getLng()); // 경도 상태 업데이트
           // 주소 검색
           geocoder.coord2Address(
             position.getLng(),
@@ -84,12 +115,20 @@ export default function Map() {
           <div className="w-[6px] h-[6px] rounded-full bg-primary absolute left-2 top-1" />
         </div>
       </div>
-      {!address && (
-        <h3 className="text-sm text-gray-600 absolute bottom-5 z-20 right-5">
-          본인의 위치를 지정해주세요
-        </h3>
-      )}
-      <div id="map" className="w-full h-[90vh]" />
+
+      <div id="map" className="w-full h-[70vh] relative mb-3">
+        {!address && (
+          <h3 className="text-lg  bg-gray-600 text-white px-4 py-[2px] rounded-full absolute top-2 z-20 right-5">
+            마커를 끌어서 본인의 위치를 지정해주세요
+          </h3>
+        )}
+      </div>
+      <button
+        onClick={handleSubmit}
+        className="py-2 px-3 text-xl bg-primary text-white"
+      >
+        도움 요청 등록하기
+      </button>
     </div>
   );
 }

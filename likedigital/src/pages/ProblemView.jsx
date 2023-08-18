@@ -32,6 +32,7 @@ export default function ProblemView() {
       const filtered = withDistance.filter(
         (post) => post.calculatedDistance <= 500
       );
+      filtered.sort((a, b) => a.calculatedDistance - b.calculatedDistance);
       setFilteredPosts(filtered);
     }
   }, [currentPosition, posts]);
@@ -40,9 +41,13 @@ export default function ProblemView() {
     <section className="flex flex-col relative">
       <HeaderTitle />
       <div className="flex flex-col justify-center gap-2 px-2 mt-4">
+        <h1 className="mb-1 text-center text-lg text-white bg-sky rounded-full py-1 tracking-wider w-[95%] mx-auto">
+          반경 500m 도움 요청 목록{" "}
+        </h1>
         {filteredPosts.map((problem, index) => (
           <ProblemCard
             key={index}
+            id={problem.id}
             title={problem.title}
             phoneNumber={problem.phoneNumber}
             distance={problem.calculatedDistance} // distance로 전달
@@ -55,19 +60,14 @@ export default function ProblemView() {
     </section>
   );
 }
-
 function getDistanceBetween(lat1, lon1, lat2, lon2) {
-  const R = 6371e3;
-  const φ1 = (lat1 * Math.PI) / 180;
-  const φ2 = (lat2 * Math.PI) / 180;
-  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
-
+  const p = 0.017453292519943295;
+  const c = Math.cos;
   const a =
-    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    0.5 -
+    c((lat2 - lat1) * p) / 2 +
+    (c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
 
-  const distance = R * c;
-  return distance;
+  const distance = 12742 * Math.asin(Math.sqrt(a));
+  return Math.round(distance * 1000);
 }

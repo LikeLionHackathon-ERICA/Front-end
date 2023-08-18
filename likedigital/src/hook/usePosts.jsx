@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../util";
 
 function usePosts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/data/posts.json")
+      .get(`${BASE_URL}/posts/`)
       .then((response) => {
         setPosts(response.data);
       })

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://35.216.16.113:8080";
+export const BASE_URL = "http://35.216.16.113:8080";
 
 export const registerAuth = async (user) => {
   const response = await axios.post(`${BASE_URL}/auth/registration/`, user);
@@ -57,24 +57,31 @@ export const getAllProblem = async () => {
   }
 };
 
-export const uploadProblem = async () => {
+export const uploadProblem = async ({
+  title,
+  lat,
+  lon,
+  username,
+  phone_number,
+}) => {
   try {
+    console.log(title, lat, lon, username, phone_number);
     const response = await axios.post(
       `${BASE_URL}/posts/`,
       {
-        title: "편의점 택배보내기",
+        title: title,
         user: {
-          username: "TESTIDTESTID",
-          phone_number: "+821033339999",
+          username: username,
+          phone_number: phone_number,
         },
-        lat: 34,
-        lon: 56,
+        lat: lat,
+        lon: lon,
         status: "매칭 완료",
         category: "기타",
-        matching_user: {
-          username: "해결사1",
-          phone_number: "+821010101999",
-        },
+        // matching_user: {
+        //   username: "kevin",
+        //   phone_number: "+8201033337777",
+        // },
       },
       {
         headers: {
@@ -83,8 +90,9 @@ export const uploadProblem = async () => {
       }
     );
 
-    console.log(response);
-    return response;
+    console.log(response.data);
+    localStorage.setItem("PostId", response.data.id);
+    return response.data;
   } catch (error) {
     console.error("Error uploading problem:", error);
     throw error;
@@ -107,20 +115,4 @@ export function haversine(lat1, lon1, lat2, lon2) {
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
-}
-
-function getDistanceBetween(lat1, lon1, lat2, lon2) {
-  const R = 6371e3;
-  const φ1 = (lat1 * Math.PI) / 180;
-  const φ2 = (lat2 * Math.PI) / 180;
-  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
-
-  const a =
-    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-  const distance = R * c;
-  return distance;
 }

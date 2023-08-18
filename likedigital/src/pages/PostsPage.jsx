@@ -11,8 +11,8 @@ function PostsPage() {
   const posts = usePosts();
   const [post, setPost] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
-  const [distance, setDistance] = useState(null); // 추가
-
+  const [distance, setDistance] = useState(null);
+  const user_type = localStorage.getItem("userType");
   useEffect(() => {
     setPost(posts.find((p) => p.id === parseInt(id)));
   }, [posts, id]);
@@ -92,15 +92,17 @@ function PostsPage() {
           {post.title}
         </h1>
         <div className="flex items-center justify-between px-4 gap-4">
-          <MatchInfoCard post={post} />
+          {user_type === "provider" ? (
+            <MatchInfoCard post={post} />
+          ) : (
+            <MatchReceiverInfoCard post={post} />
+          )}
         </div>
-        {/* 거리 표시 */}
         <div className="my-2">
           <span>
             거리: {distance ? `${distance.toFixed(2)}m` : "계산중..."}
           </span>
         </div>
-        {/* 지도 컨테이너 추가 */}
         <div
           id="mini-map"
           className="w-full h-[400px] border-4 rounded-xl border-primary"
@@ -115,7 +117,7 @@ export default PostsPage;
 function MatchInfoCard({ post }) {
   return (
     <div className="flex flex-col items-center gap-2 ">
-      <h2>{post.user.username}님</h2>
+      <h2 className="text-xl">{post.user.username}</h2>
       <a
         href={`tel:${post.user.phone_number}`}
         className="flex items-center gap-2 justify-center px-4 py-2 text-white bg-primary rounded-md"
@@ -126,20 +128,55 @@ function MatchInfoCard({ post }) {
     </div>
   );
 }
+
+function MatchReceiverInfoCard({ post }) {
+  const matching_user =
+    post.matching_user?.username === undefined
+      ? "매칭된 사용자가 없습니다"
+      : post.matching_user?.username;
+  const matching_phone_number =
+    post.matching_user?.phone_number === undefined
+      ? "매칭된 사용자가 없습니다"
+      : post.matching_user?.phone_number;
+  return (
+    <div className="flex flex-col items-center gap-2 ">
+      <h2 className="text-xl">{matching_user}</h2>
+      {post.matching_user?.phone_number && (
+        <a
+          href={`tel:${post.matching_user?.phone_number}`}
+          className="flex items-center gap-2 justify-center px-4 py-2 text-white bg-primary rounded-md"
+        >
+          <BiSolidPhoneCall />
+          전화문의
+        </a>
+      )}
+    </div>
+  );
+}
 function NoMatching() {
+  const user_type = localStorage.getItem("userType");
   return (
     <section className="flex flex-col">
       <HeaderTitle />
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="flex flex-col gap-[1px] justify-center items-center bg-white p-4 rounded-xl shadow-xl w-full max-w-sm mx-4 text-center border-2 border-primary relative">
           <h2 className="text-2xl font-semibold text-primary mb-4">알림</h2>
-          <p className="text-xl mb-6 text-gray-600 font-bold">
+          <p className="text-2xl mb-6 font-bold text-orange-500">
             현재 성사된 매칭이 없습니다
           </p>
           <p className="flex flex-col mb-6 text-gray-500 gap-1">
-            <span className="text-primary text-xl">도움지도</span>
-            <span className="text-primary text-xl">문제목록</span>
-            메뉴를 클릭하여 매칭을 신청해보세요!
+            <span className="text-primary text-xl">
+              {user_type === "provider" ? "도움지도" : ""}{" "}
+            </span>
+            <span className="text-primary text-xl">
+              {user_type === "provider" ? "문제목록" : "문제작성"}
+            </span>
+            <span className="text-lg">
+              메뉴를 클릭하여
+              {user_type === "provider"
+                ? " 매칭을 신청해보세요!"
+                : " 도움을 요청해보세요!"}
+            </span>
           </p>
         </div>
       </div>
