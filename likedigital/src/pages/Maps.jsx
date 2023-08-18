@@ -16,7 +16,7 @@ function Maps() {
   const posts = usePosts();
 
   useEffect(() => {
-    kakao.maps.load(() => {
+    kakao?.maps.load(() => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const lat = position.coords.latitude;

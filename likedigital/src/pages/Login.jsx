@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem("token", `Token ${response.key}`);
       localStorage.setItem("username", form.username);
       localStorage.setItem("userType", userType);
-      navigate("/home");
+      navigate("/posts/null");
     } catch (error) {
       console.error("로그인 실패:", error);
     }
@@ -38,7 +38,7 @@ const Login = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/home"); // 예: 사용자의 홈 페이지나 대시보드로 변경하세요.
+      navigate("/posts/null"); // 예: 사용자의 홈 페이지나 대시보드로 변경하세요.
     }
   }, [navigate]);
 
