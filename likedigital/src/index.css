@@ -3,25 +3,61 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'JUA';
-  src: url('./fonts/BMJUA.ttf');
+  font-family: "Poppins-ExtraBoldItalic";
+  src: url("./fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'BMDOHYEON';
-  src: url('./fonts/BMDOHYEON.ttf');
+  font-family: "Poppins-SemiBold";
+  src: url("./fonts/Poppins-SemiBold.ttf") format("truetype");
 }
-*{
+
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  /* 500 */
+  font-family: "IBMPlexSansKR-Medium";
+  src: url("./fonts/IBMPlexSansKR-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  /* 600 */
+  font-family: "IBMPlexSansKR-SemiBold";
+  src: url("./fonts/IBMPlexSansKR-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "JUA";
+  src: url("./fonts/BMJUA.ttf");
+}
+
+@font-face {
+  font-family: "BMDOHYEON";
+  src: url("./fonts/BMDOHYEON.ttf");
+}
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-html, body {
+.font-jua {
+  font-family: "IBMPlexSansKR-Medium";
+}
+
+.font-doh {
+  font-family: "BMDOHYEON";
+}
+
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
-  font-family: 'JUA';
+  font-family: "IBMPlexSansKR-Medium";
 }
 a {
   text-decoration: none;
